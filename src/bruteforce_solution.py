@@ -1,12 +1,14 @@
 from model import ProblemInstance, Event
+from pathlib import Path
 import itertools
 
+THIS_DIR = Path(__file__).resolve().parent
 message = " Group 8 Bruteforce Solution "
 print(message.center(100, '#'))
 
 
 print("Loading from file.....", end='') # Loads file
-problem = ProblemInstance.from_file(r'input_small.txt')
+problem = ProblemInstance.from_file(rf'{THIS_DIR}\input_small.txt')
 print(' success')
 
 list = problem.events
