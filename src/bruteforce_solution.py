@@ -38,7 +38,7 @@ message = " Optimal Solution: "
 print(message.center(100, '#'))
 
 count = 1
-for event in max_enjoy_subset:
+for event in max_enjoy_subset: # Prints optimal solution
     print(f"Event {count}: Name: {event.name}, Cost: {event.cost}, Enjoyment: {event.e_value}")
     count += 1
 
