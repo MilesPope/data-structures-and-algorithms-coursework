@@ -1,7 +1,7 @@
 import unittest
 import sys
 from model import Event, ProblemInstance
-
+from solutions.bruteforce_solution import bruteforce
 
 
 class TestEventClass(unittest.TestCase):
@@ -66,3 +66,37 @@ class TestProblemInstance(unittest.TestCase):
         self.assertEqual(new_problem_instance.event_count, 10)
         new_event = Event("Welcome-Dinner", 2, 40, 75)
         self.assertEqual(new_event, new_problem_instance.events[0])
+    
+    def test_single_event_over_budget(self):
+        '''
+        Test that for a single event over budget, an empty list is returned
+        '''
+        e1 = Event('A', 1, cost=100, e_value=10)
+        problem = ProblemInstance(events=[e1], event_count=1, cost_constraint=20, time_constraint=0)
+        result = bruteforce(problem)
+        self.assertEqual(result, ())
+    
+    def test_single_event_under_budget(self):
+        '''
+        Test that for a single event under budget, the event itself is returned
+        '''
+        e1 = Event('A', 1, cost=10, e_value=10)
+        problem = ProblemInstance(events=[e1], event_count=1, cost_constraint=20, time_constraint=0)
+        result = bruteforce(problem)
+        self.assertEqual(result, (e1,))
+    
+    def test_best_combination(self):
+        '''
+        Test that for multiple events it chooses the best events
+        '''
+        e1 = Event('A', 1, cost=10, e_value=10)
+        e2 = Event('B', 1, cost=5, e_value=10)
+        e3 = Event('C', 1, cost=5, e_value=10)
+        e4 = Event('D', 1, cost=10, e_value=10)
+        problem = ProblemInstance(events=[e1, e2, e3, e4], event_count=4, cost_constraint=20, time_constraint=0)
+        result = bruteforce(problem)
+        self.assertEqual(result, (e1, e2, e3))
+        
+        
+        
+        
