@@ -55,29 +55,40 @@ def reconstruct_solution(budget, e_values, e_costs, e_names, e_durations, num_of
 
     while num_of_events > 0 and budget > 0:
         index = num_of_events - 1
+        # if e_names[index] == "Campus-Tour":
+        #     print("DEBUG: checking Compus Tour")
         # Check states are computed
         if budget_memory[num_of_events][budget] == -1:
+            # if e_names[index] == "Campus-Tour":
+            #     print("DEBUG: Campus Tour calculated")
             top_down_approach(budget, e_values, e_costs, e_names, e_durations, num_of_events-1, budget_memory)
 
         current = budget_memory[num_of_events][budget]
 
         # If the current event fits:
         if e_costs[index] <= budget:
+            # if e_names[index] == "Campus-Tour":
+            #     print("DEBUG: Campus Tour fits in budget")
             remaining = budget - e_costs[index]
 
             if budget_memory[num_of_events - 1][remaining] == -1:
                 # If we haven't computed this path, do so.
-                top_down_approach(remaining, e_values, e_costs, e_names, e_durations, num_of_events-1, budget_memory)
+                # if e_names[index] == "Campus-Tour":
+                #     print("DEBUG: Campus Tour being calculated with path")
+                budget_memory[num_of_events - 1][remaining] = top_down_approach(remaining, e_values, e_costs, e_names, e_durations, num_of_events-1, budget_memory)
 
             # Calculate the e_value if the event was taken
             taken_val = e_values[index] + budget_memory[num_of_events-1][remaining]
-            # If equal to current
+            # if e_names[index] == "Campus-Tour":
+            #     print(f"DEBUG: Campus tour {taken_val=}, {current=}, {budget_memory[num_of_events - 1][remaining]=}")
+            # If equal to current it must have been taken
             if current == taken_val:
                 chosen_events.append(
                     Event(
                         e_names[index], e_durations[index], e_costs[index], e_values[index]
                     )
                 )
+                # print(f"DEBUG: Taken {chosen_events[-1].to_str()}, {current}, {taken_val}")
                 budget -= e_costs[index]
                 num_of_events -= 1
                 continue
@@ -104,17 +115,17 @@ def dynamic_event_planner(problem_instance: ProblemInstance):
 
 
 
-BASE_DIR = Path(__file__).resolve().parent
-file_path = BASE_DIR.parent / "sample_inputs" / "input_500.txt"
-print("Loading from file.....", end='')
-problem = ProblemInstance.from_file(file_path)
-print(' success')
+# BASE_DIR = Path(__file__).resolve().parent
+# file_path = BASE_DIR.parent / "sample_inputs" / "input_500.txt"
+# print("Loading from file.....", end='')
+# problem = ProblemInstance.from_file(file_path)
+# print(' success')
 
-solution = dynamic_event_planner(problem)
-print(solution[0])
-total_spent = 0
-for event in solution[1]:
-    print(event.name, end=" ")
-    print(event.cost)
-    total_spent += event.cost
-print(f"Budget: {problem.cost_constraint}, spent: {total_spent}")
+# solution = dynamic_event_planner(problem)
+# print(solution[0])
+# total_spent = 0
+# for event in solution[1]:
+#     print(event.name, end=" ")
+#     print(event.cost)
+#     total_spent += event.cost
+# print(f"Budget: {problem.cost_constraint}, spent: {total_spent}")
