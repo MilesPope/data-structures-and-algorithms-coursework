@@ -1,7 +1,6 @@
 import unittest
-import sys
 from model import Event, ProblemInstance
-from solutions.bruteforce_solution import bruteforce
+from Solutions.bruteforce_solution import bruteforce
 
 
 class TestEventClass(unittest.TestCase):
