@@ -1,6 +1,7 @@
 from model import ProblemInstance, Event
 from pathlib import Path
 from solutions.bruteforce_solution import bruteforce
+from solutions.dynamic_solution import dynamic_event_planner
 import itertools
 INPUT_FILE = 'input_small.txt'
 THIS_DIR = Path(__file__).resolve().parent
