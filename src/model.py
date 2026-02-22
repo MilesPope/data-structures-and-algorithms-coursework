@@ -95,7 +95,7 @@ class ProblemInstance:
     @property
     def event_count(self):
         return self._event_count
-    
+        
     @classmethod
     def from_file(cls, file_name: str) -> "ProblemInstance":
         """
