@@ -43,7 +43,7 @@ max_e_value, chosen_events = dynamic_event_planner(problem)
 total_time, total_cost = 0, 0
 print("Chosen activities:")
 for event in chosen_events:
-    print("\t-" + event.to_str())
+    print("\t- " + event.to_str())
     total_cost += event.cost
     total_time += event.duration
 
