@@ -63,6 +63,15 @@ class Event:
         except TypeError:
             print("Missing a parameter")
 
+    def to_str(self) -> str:
+        """
+        Convert instance information into a string with the following format:
+         Name (duration hours, £cost, enjoyment e_value)
+        i.e.:
+            Game-Night (3 hours, £80, enjoyment 120)
+        """
+        return f"{self.name} ({self.duration} hours, ${self.cost}, enjoyment {self.e_value})"
+
 class ProblemInstance:
     """
     An instance of the problem which contains data relevant 
@@ -95,7 +104,7 @@ class ProblemInstance:
     @property
     def event_count(self):
         return self._event_count
-    
+        
     @classmethod
     def from_file(cls, file_name: str) -> "ProblemInstance":
         """
