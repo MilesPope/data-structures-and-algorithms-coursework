@@ -65,7 +65,7 @@ class TestProblemInstance(unittest.TestCase):
         self.assertEqual(new_problem_instance.event_count, 10)
         new_event = Event("Welcome-Dinner", 2, 40, 75)
         self.assertEqual(new_event, new_problem_instance.events[0])
-    
+class TestBruteForceSolution(unittest.TestCase):
     def test_single_event_over_budget(self):
         '''
         Test that for a single event over budget, an empty list is returned
