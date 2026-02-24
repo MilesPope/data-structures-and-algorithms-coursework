@@ -88,10 +88,10 @@ def reconstruct_solution(budget, e_values, e_costs, e_names, e_durations, num_of
 def dynamic_event_planner(problem_instance: ProblemInstance):
     # Initialise constraints and arrays from the problem instance
     budget = problem_instance.cost_constraint
-    e_values = [event.e_value for event in problem_instance.events]
-    e_costs  = [event.cost for event in problem_instance.events]
-    e_names =  [event.name for event in problem_instance.events]
-    e_durations = [event.duration for event in problem_instance.events]
+    e_values = [event.e_value for event in problem_instance.events][::-1]
+    e_costs  = [event.cost for event in problem_instance.events][::-1]
+    e_names =  [event.name for event in problem_instance.events][::-1]
+    e_durations = [event.duration for event in problem_instance.events][::-1]
     num_of_events = problem_instance.event_count
     # Table for results to be checked:
     budget_memory = [[-1] * (budget + 1) for _ in range(num_of_events + 1)]
