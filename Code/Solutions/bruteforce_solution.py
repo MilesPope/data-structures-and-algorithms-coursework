@@ -9,7 +9,7 @@ def bruteforce(problem):
 
 
     max_enjoy = -1
-    max_enjoy_subset = []
+    max_enjoy_subset = ()
     # print("Calculating solution from every possible combination.....")
     for i in range(num+1):
         for subset in itertools.combinations(list, i): # Calculates every possible combination of every length in the loop
