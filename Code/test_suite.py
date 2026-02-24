@@ -4,11 +4,6 @@ from Solutions.bruteforce_solution import bruteforce
 from Solutions.dynamic_solution import dynamic_event_planner
 from pathlib import Path
 
-THIS_DIR = Path(__file__).resolve().parent.parent # Get to dir containing src and sample_inputs
-INPUT_FILE = 'input_small.txt'
-problem = ProblemInstance.from_file(rf'{THIS_DIR}/Input_Files/{INPUT_FILE}')
-found_file = True
-
 
 class TestEventClass(unittest.TestCase):
     """
