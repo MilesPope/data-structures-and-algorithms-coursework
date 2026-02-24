@@ -88,10 +88,10 @@ def reconstruct_solution(budget, e_values, e_costs, e_names, e_durations, num_of
 def dynamic_event_planner(problem_instance: ProblemInstance):
     # Initialise constraints and arrays from the problem instance
     budget = problem_instance.cost_constraint
-    e_values = [event.e_value for event in problem_instance.events]
-    e_costs  = [event.cost for event in problem_instance.events]
-    e_names =  [event.name for event in problem_instance.events]
-    e_durations = [event.duration for event in problem_instance.events]
+    e_values = [event.e_value for event in problem_instance.events][::-1]
+    e_costs  = [event.cost for event in problem_instance.events][::-1]
+    e_names =  [event.name for event in problem_instance.events][::-1]
+    e_durations = [event.duration for event in problem_instance.events][::-1]
     num_of_events = problem_instance.event_count
     # Table for results to be checked:
     budget_memory = [[-1] * (budget + 1) for _ in range(num_of_events + 1)]
@@ -100,20 +100,3 @@ def dynamic_event_planner(problem_instance: ProblemInstance):
     # Reconstruct the solution we got to get the events that we chose using the budget memory
     chosen = reconstruct_solution(budget, e_values, e_costs, e_names, e_durations, num_of_events, budget_memory)
     return max_value, chosen
-
-
-
-# BASE_DIR = Path(__file__).resolve().parent
-# file_path = BASE_DIR.parent / "sample_inputs" / "input_500.txt"
-# print("Loading from file.....", end='')
-# problem = ProblemInstance.from_file(file_path)
-# print(' success')
-
-# solution = dynamic_event_planner(problem)
-# print(solution[0])
-# total_spent = 0
-# for event in solution[1]:
-#     print(event.name, end=" ")
-#     print(event.cost)
-#     total_spent += event.cost
-# print(f"Budget: {problem.cost_constraint}, spent: {total_spent}")

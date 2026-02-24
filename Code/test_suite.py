@@ -4,11 +4,6 @@ from Solutions.bruteforce_solution import bruteforce
 from Solutions.dynamic_solution import dynamic_event_planner
 from pathlib import Path
 
-THIS_DIR = Path(__file__).resolve().parent.parent # Get to dir containing src and sample_inputs
-INPUT_FILE = 'input_small.txt'
-problem = ProblemInstance.from_file(rf'{THIS_DIR}/Input_Files/{INPUT_FILE}')
-found_file = True
-
 
 class TestEventClass(unittest.TestCase):
     """
@@ -73,7 +68,7 @@ class TestProblemInstance(unittest.TestCase):
         """
         self.assertEqual(self.problem.event_count, 10)
         new_event = Event("Welcome-Dinner", 2, 40, 75)
-        self.assertEqual(new_event, new_problem_instance.events[0])
+        self.assertEqual(new_event, self.problem.events[0])
         
 class TestBruteForceSolution(unittest.TestCase):
     def test_single_event_over_budget(self):

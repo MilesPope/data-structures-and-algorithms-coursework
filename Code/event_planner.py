@@ -14,8 +14,6 @@ while not found_file:
     except:
         print("File not found, ensure it is in /Input_Files/ and has .txt file extention")
 
-INPUT_FILE = 'input_100.txt'
-print(THIS_DIR)
 print("========================================")
 print("GROUP 8 - EVENT PLANNER - RESULTS")
 print("========================================")
