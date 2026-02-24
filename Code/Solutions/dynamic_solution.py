@@ -2,7 +2,6 @@
 Top down approach to finding an optimal solution to a problem instance
 """
 from model import ProblemInstance, Event
-import itertools
 from pathlib import Path
 
 def top_down_approach(budget, e_values, e_costs, e_names, e_durations, num_of_events, budget_memory):
@@ -55,32 +54,22 @@ def reconstruct_solution(budget, e_values, e_costs, e_names, e_durations, num_of
 
     while num_of_events > 0 and budget > 0:
         index = num_of_events - 1
-        # if e_names[index] == "Campus-Tour":
-        #     print("DEBUG: checking Compus Tour")
         # Check states are computed
         if budget_memory[num_of_events][budget] == -1:
-            # if e_names[index] == "Campus-Tour":
-            #     print("DEBUG: Campus Tour calculated")
             top_down_approach(budget, e_values, e_costs, e_names, e_durations, num_of_events-1, budget_memory)
 
         current = budget_memory[num_of_events][budget]
 
         # If the current event fits:
         if e_costs[index] <= budget:
-            # if e_names[index] == "Campus-Tour":
-            #     print("DEBUG: Campus Tour fits in budget")
             remaining = budget - e_costs[index]
 
             if budget_memory[num_of_events - 1][remaining] == -1:
                 # If we haven't computed this path, do so.
-                # if e_names[index] == "Campus-Tour":
-                #     print("DEBUG: Campus Tour being calculated with path")
                 budget_memory[num_of_events - 1][remaining] = top_down_approach(remaining, e_values, e_costs, e_names, e_durations, num_of_events-1, budget_memory)
 
             # Calculate the e_value if the event was taken
             taken_val = e_values[index] + budget_memory[num_of_events-1][remaining]
-            # if e_names[index] == "Campus-Tour":
-            #     print(f"DEBUG: Campus tour {taken_val=}, {current=}, {budget_memory[num_of_events - 1][remaining]=}")
             # If equal to current it must have been taken
             if current == taken_val:
                 chosen_events.append(
@@ -88,7 +77,6 @@ def reconstruct_solution(budget, e_values, e_costs, e_names, e_durations, num_of
                         e_names[index], e_durations[index], e_costs[index], e_values[index]
                     )
                 )
-                # print(f"DEBUG: Taken {chosen_events[-1].to_str()}, {current}, {taken_val}")
                 budget -= e_costs[index]
                 num_of_events -= 1
                 continue

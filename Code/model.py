@@ -30,6 +30,9 @@ class Event:
                 and self.cost == other.cost
                 and self.e_value == other.e_value
                 )
+    
+    def __ne__(self, other:object) -> bool:
+        return not self.__eq__(other)
 
 
     # Getters. Setters unrequired - fields are final
@@ -70,7 +73,7 @@ class Event:
         i.e.:
             Game-Night (3 hours, £80, enjoyment 120)
         """
-        return f"{self.name} ({self.duration} hours, ${self.cost}, enjoyment {self.e_value})"
+        return f"{self.name} ({self.duration} hours, £{self.cost}, enjoyment {self.e_value})"
 
 class ProblemInstance:
     """
@@ -144,3 +147,5 @@ class ProblemInstance:
                     events.append(Event.from_str(line.strip()))
             
             return ProblemInstance(time_constraint, cost_constraint, events, event_count) # type: ignore
+        
+    
